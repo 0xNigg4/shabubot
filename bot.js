@@ -20,8 +20,8 @@ const mysql = require('mysql2/promise');
 const { createCanvas, loadImage } = require('canvas');
 const QRCode = require('qrcode');
 
-const SF_ROLE_ID = '1303016685699203122';
-const ESIM_CHANNEL_ID = '1324351256709431336';
+const ROLE_ID = 'put_ur_role_id_here';
+const CHANNEL_ID = 'put_ur_channel_id_here';
 
 const client = new Client({
   intents: [
@@ -179,7 +179,7 @@ client.on('interactionCreate', async interaction => {
     if (interaction.isChatInputCommand()) {
       if (interaction.commandName === 'esim') {
         // Defer reply if this command takes time
-        if (interaction.channelId !== ESIM_CHANNEL_ID) {
+        if (interaction.channelId !== CHANNEL_ID) {
           await interaction.reply({ 
             content: 'This command can only be used in the designated eSIM generator channel.', 
             flags: 64 
@@ -187,7 +187,7 @@ client.on('interactionCreate', async interaction => {
           return;
         }
 
-        if (!interaction.member?.roles.cache.has(SF_ROLE_ID)) {
+        if (!interaction.member?.roles.cache.has(ROLE_ID)) {
           await interaction.reply({ 
             content: 'You do not have permission to use this command.', 
             flags: 64 
